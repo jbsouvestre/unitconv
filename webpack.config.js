@@ -4,7 +4,7 @@ var entry = './src/main.js',
         path: __dirname,
         filename: 'main.js'
     };
-
+var autoprefixerOptions = '{browsers: ["last 2 version"]}';
 var config = {
     debug: false,
     //devtool: 'eval',
@@ -15,6 +15,9 @@ var config = {
             test: /\.js$/,
             exclude: /node_modules/,
             loader: 'babel-loader'
+        }, {
+            test: /\.(s)?css$/,
+            loader: 'raw!inline-style!autoprefixer?' + autoprefixerOptions + '!sass'
         }]
 
     }

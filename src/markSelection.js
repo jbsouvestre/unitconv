@@ -1,19 +1,21 @@
-
 let markerTestChar = '\ufeff';
 let markerTestCharEntity = '&#xfeff';
 
-let markerElId = '$_marker_'+ new Date().getTime() + '_' + Math.random().toString().substr(2);
+let markerElId = '$_marker_' + new Date().getTime() + '_' + Math.random().toString().substr(2);
 
-function mark(range){
+function mark(range) {
     let markerEl = document.createElement('span');
-    markerEl.appendChild(document.createTextNode( markerTestChar ));
+    markerEl.appendChild(document.createTextNode(markerTestChar));
     markerEl.id = markerElId;
     range.insertNode(markerEl);
 
     return markerEl;
 }
 
-export default function markSelection(text) {
+export
+default
+
+function markSelection(text) {
     let sel, range, markerEl, selectionEl;
 
     if (document.selection && document.selection.createRange) {
@@ -26,7 +28,7 @@ export default function markSelection(text) {
             </span>`
         );
 
-    
+
     } else if (window.getSelection) {
         sel = window.getSelection();
 
@@ -43,18 +45,16 @@ export default function markSelection(text) {
 
             range.collapse(false);
         }
-        
+
         markerEl = mark(range);
     }
 
 
-    if(markerEl && !selectionEl){
+    if (markerEl && !selectionEl) {
         selectionEl = document.createElement('div');
-        selectionEl.style.border = '1px solid #151515';
-        selectionEl.style.backgroundColor = '#000';
+
         selectionEl.innerHTML = text;
-        selectionEl.style.color = '#eee';
-        selectionEl.style.position = 'absolute';
+        selectionEl.setAttribute('style', require('./styles/tip.scss'));
 
         document.body.appendChild(selectionEl);
     }
@@ -66,13 +66,13 @@ export default function markSelection(text) {
     do {
         leftOff += obj.offsetLeft;
         topOff += obj.offsetTop;
-    } while(/*jshint boss: true*/ obj = obj.offsetParent);
+    } while ( /*jshint boss: true*/ obj = obj.offsetParent);
 
     selectionEl.style.left = `${leftOff}px`;
 
-    topOff = topOff + (topOff >= 25 ? -25 : 25); 
+    topOff = topOff + (topOff >= 25 ? -25 : 25);
     leftOff = leftOff + (leftOff >= 25 ? -25 : 25);
-    
+
     selectionEl.style.top = `${topOff}px`;
 
     markerEl.parentNode.removeChild(markerEl);

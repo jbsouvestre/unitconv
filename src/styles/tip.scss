@@ -1,0 +1,30 @@
+$base: #eee;
+$bg-color: #fff;
+$color: #666;
+$font-size: 14px;
+
+$padding: 4px 5px;
+$border-radius: 4px;
+
+.___ {
+    position: absolute;
+    pointer-events: none;
+    
+    background-color: $bg-color;
+    background-image: 
+        linear-gradient(
+            to bottom,
+            $bg-color 0%,
+            darken($bg-color, 5%) 100% 
+        );
+
+    border: 1px solid darken($base, 10%);
+    border-radius: $border-radius;
+
+    padding: $padding;
+
+    color: $color;
+    font-size: $font-size;
+    
+    box-shadow: 1px 1px 3px 0px darken($color, 50%);
+}
